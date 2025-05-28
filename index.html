@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TRASH BY MARCY</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <style>
+    #popup-text {
+      display: none;
+      font-size: 20px;
+      color: red;
+    }
+
+    #more-images img {
+      width: 100px;
+      margin: 10px;
+      display: none;
+    }
+
+    #main-img {
+      width: 200px;
+      cursor: pointer;
+    }
+
+    .tooltip-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip-text {
+      visibility: hidden;
+      background-color: black;
+      color: #fff;
+      text-align: center;
+      border-radius: 5px;
+      padding: 5px 10px;
+      position: absolute;
+      z-index: 1;
+      bottom: 110%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      white-space: nowrap;
+      font-family: sans-serif;
+      font-size: 12px;
+    }
+
+    .tooltip-container:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="image-container" style="text-align: center;">
+    <img id="main-img" src="marcysitting.jpg" alt="Main Image">
+  </div>
+
+  <div id="more-images">
+    <div class="image-container" style="text-align: center;">
+      
+      <div class="tooltip-container">
+        <a href="https://www.youtube.com/@bigbossmarcy/" target="_blank">
+          <img src="YouTube.jpg" data-alt-src="YouTube Hover.jpg" alt="Extra Image 1">
+        </a>
+        <div class="tooltip-text">YouTube</div>
+      </div>
+
+      <div class="tooltip-container">
+        <a href="https://www.instagram.com/bigbossmarcy/" target="_blank">
+          <img src="Instagram.jpg" data-alt-src="Instagram Hover.jpg" alt="Extra Image 2">
+        </a>
+        <div class="tooltip-text">Instagram</div>
+      </div>
+
+      <div class="tooltip-container">
+        <a href="https://bsky.app/profile/bigbossmarcy.bsky.social" target="_blank">
+          <img src="BlueSky.jpg" data-alt-src="BlueSky Hover.jpg" alt="Extra Image 3">
+        </a>
+        <div class="tooltip-text">BlueSky</div>
+      </div>
+
+    </div>
+  </div>
+
+  <p style="text-align: center;" id="popup-text"> IF STUCK: TAP/CLICK ON MARCY 3 TIMES! IF ON MOBILE, TAP SLOWLY! </p>
+
+  <script>
+    // Conditional popup only if image is still marcysitting.jpg
+    function showPopupIfNeeded() {
+      const mainImg = document.getElementById('main-img');
+      const popup = document.getElementById('popup-text');
+
+      if (mainImg.src.includes('marcysitting.jpg')) {
+        popup.style.display = 'block';
+        setTimeout(() => {
+          popup.style.display = 'none';
+        }, 5000);
+      }
+    }
+
+    setTimeout(showPopupIfNeeded, 10000); // Trigger after 10 seconds
+  </script>
+
+  <script>
+    let clickCount = 0;
+    const mainImg = document.getElementById('main-img');
+    const moreImages = document.querySelectorAll('#more-images img');
+
+    mainImg.addEventListener('click', () => {
+      clickCount++;
+
+      if (clickCount === 3) {
+        mainImg.src = 'marcyfallen.jpg';
+
+        moreImages.forEach(img => {
+          img.style.display = 'inline';
+        });
+      }
+    });
+
+    // Hover image swap
+    moreImages.forEach(img => {
+      const originalSrc = img.src;
+      const hoverSrc = img.getAttribute('data-alt-src');
+
+      img.addEventListener('mouseover', () => {
+        if (hoverSrc) {
+          img.src = hoverSrc;
+        }
+      });
+
+      img.addEventListener('mouseout', () => {
+        img.src = originalSrc;
+      });
+    });
+  </script>
+
+  <h1><p style="text-align: center;"> Trash by Marcy 2025 </p></h1>
+</body>
+</html>
